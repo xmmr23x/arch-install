@@ -23,7 +23,7 @@ fi
 # Instalación de paquetes 
 
 echo "Instalando el sistema..."
-pacstrap /mnt linux-lts linux-firmware base base-devel wpa-supplicant networkmanager dhcpcd os-prober nano grub ntfs-3g
+pacstrap /mnt linux-lts linux-firmware base base-devel wpa_supplicant networkmanager dhcpcd os-prober nano grub ntfs-3g 
 
 # generar fstab
 
@@ -51,7 +51,7 @@ mv /etc/sudoers.b /etc/sudoers &
 
 # idioma y archivos
 echo "Estableciendo idioma y generando archivos necesarios..."
-ed 's/#es_ES.UTF-8 UTF-8/es_ES.UTF-8 UTF-8/' < /etc/locale.gen > /etc/locale.gen.b &
+sed 's/#es_ES.UTF-8 UTF-8/es_ES.UTF-8 UTF-8/' < /etc/locale.gen > /etc/locale.gen.b &
 
 mv /etc/locale.gen.b /etc/locale.gen &
 locale-gen &
