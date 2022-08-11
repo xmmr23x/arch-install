@@ -3,21 +3,27 @@
 # Montaje de las particiones
 # 
 # $1: particion para /
-# $2: particion para /home
-# $3: particion para /boot
+# $2: particion para datos
+# $3: particion para datos
 # 
+
+if [[ $# -eq 0 ]]; then
+	echo "No se han indicado particiones."
+fi
 
 echo "Montando $1 en /..."
 mount $1 /mnt &
 
 if [[ $# -gt 1 ]]; then
-	echo "Montando $2 en /home..."
-	mount $2 /mnt &
+	echo -n "Punto de montaje para $2: "
+	read punto1
+	mount $2 &punto1 &
 fi
 
 if [[ $# -gt 2 ]]; then
-	echo "Montando $3 en /boot..."
-	mount $3 /mnt &
+	echo "Punto de montaje para $3: "
+	read punto2
+	mount $3 $punto2 &
 fi
 
 # Instalación de paquetes 
@@ -29,8 +35,6 @@ pacstrap /mnt linux-lts linux-firmware base base-devel wpa_supplicant networkman
 
 echo "Generando fstab para el sistema..."
 genfstab -U /mnt > /mnt/etc/fstab
-
-# arch-chroot /mnt
 
 # Contraseñas y usuarios
 
