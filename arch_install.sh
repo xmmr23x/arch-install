@@ -9,6 +9,7 @@
 
 if [[ $# -eq 0 ]]; then
 	echo "No se han indicado particiones."
+	exit
 fi
 
 echo "Montando $1 en /..."
